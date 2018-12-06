@@ -11,7 +11,7 @@ syst2 = ss(A,B,C,D);
 R_new=pole(syst2);
 
 %% Unstructured analysis of SatBFrob2
-[A,B,C,D] = linmod('satBFrob2');
+[A,B,C,D] = linmod('satBFrob2_v2017');
 sys = ss(A,B,C,D);                      % Importing M block
 SC = diag([0.3 0.3 0.5 0.5 0.2 0.2]);   % Parameter variation margins
 syscal = SC^0.5*sys*SC^0.5;             % M link with parameter variation block
