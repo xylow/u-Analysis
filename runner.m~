@@ -58,36 +58,31 @@ end
 
 % Lower bound calculations
 [lbndc,wclc,pert]=mulb(syscal, blkc);
-disp("Mu analysis done - lower bound!")
-plot(wclc+j*lbndc,'b*','MarkerSize',15);
-grid;
-title("Mu upper and lower bounds for complex-only uncertainties")
-xlabel("frequency (rad/s)")
-ylabel("mu-bound values")
-
+if pbc ~= 0
+    disp("Problem on mixed mu analysis = "+str(pbc))
+else
+    disp("Mu analysis done - lower bound!")
+    plot(wclc+j*lbndc,'y*','MarkerSize',15);
+    grid;
+    title("Mu upper and lower bounds for complex-only uncertainties")
+    xlabel("frequency (rad/s)")
+    ylabel("mu-bound values")
+end
 
 
 % Case 2 : The uncertainties are mixed - complex and real
 
-% Upper bound calculations
-[upbndr, wcur, tabr, pbc] = muub_mixed(syscal,blkr);
-if pbc ~= 0
-    disp("Problem on mixed mu analysis = "+str(pbc))
+[upbndm, wcm, tabm, pbm] = muub_mixed(syscal,blkr);
+if pbm ~= 0
+    disp("Problem on mixed mu analysis = "+str(pbm))
 else
-    disp("Mu analysis done - upper bound!")
-    plot_muub(tabr);
+    disp("Mu analysis done!")
+    figure(4); clf;
+    plot_muub(tabm);
+    title("Mu upper bounds for mixed uncertainties")
+    xlabel("frequency (rad/s)")
+    ylabel("mu-bound values")
 end
-
-
-% Lower bound calculations
-[lbndr,wclr,pert]=mulb(syscal, blkr);
-disp("Mu analysis done - lower bound!")
-plot(wclr+j*lbndr,'b*','MarkerSize',15);
-grid;
-title("Mu upper and lower bounds for mixed uncertainties")
-xlabel("frequency (rad/s)")
-ylabel("mu-bound values")
-
 
 
 
